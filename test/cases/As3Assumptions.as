@@ -37,13 +37,13 @@ package cases
 		}
 		
 		[Test]
-		public function youCanRebindStaticConstants():void
+		public function youCanRebindStaticFunctionObjects():void
 		{
 			Assert.assertFalse("Static constant function objects can be rebound",
 				StaticFunctionObject.testConst.call(this, ' StaticFunctionObject.testConst').indexOf('As3Assumptions') == -1
 			);
 			Assert.assertFalse("Static function objects can be rebound",
-				StaticFunctionObject.testConst.call(this, ' StaticFunctionObject.testVar').indexOf('As3Assumptions') == -1
+				StaticFunctionObject.testVar.call(this, ' StaticFunctionObject.testVar').indexOf('As3Assumptions') == -1
 			);
 		}
 	}
