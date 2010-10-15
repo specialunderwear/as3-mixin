@@ -60,7 +60,7 @@ package yagni
 	 * </pre>
 	 * 
 	 * 
-	 * @param target The target should either have public member with the same
+	 * @param target The target should either have public members with the same
 	 * names as the methods defined in the mixins, or be dynamic.
 	 * @param rest the classes that need to be mixed into <code>target</code>
 	 */
