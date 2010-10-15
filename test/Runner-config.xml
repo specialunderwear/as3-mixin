@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<flex-config>
+	<benchmark>true</benchmark>
+	<default-background-color>#FFFFFF</default-background-color>
+	
+	<compiler>
+		<incremental>true</incremental>
+		<optimize>true</optimize>
+		<keep-generated-actionscript>false</keep-generated-actionscript>
+		<allow-source-path-overlap>true</allow-source-path-overlap>
+		<warn-no-constructor>false</warn-no-constructor>
+		<warn-no-explicit-super-call-in-constructor>false</warn-no-explicit-super-call-in-constructor>
+		<show-actionscript-warnings>true</show-actionscript-warnings>
+		<show-binding-warnings>true</show-binding-warnings>
+		<show-unused-type-selector-warnings>true</show-unused-type-selector-warnings>
+		<debug>true</debug>
+		
+		<library-path append="true">
+			<path-element>../lib/</path-element>
+		</library-path>
+		
+		<source-path append="true">
+			<path-element>../src</path-element>
+			<!-- <path-element>../lib/SwiftSuspenders/src</path-element> -->
+		</source-path>
+		
+		<keep-as3-metadata>
+			<name>Inject</name>
+			<name>PostConstruct</name>
+		</keep-as3-metadata>
+		
+	</compiler>
+	
+	<static-link-runtime-shared-libraries>true</static-link-runtime-shared-libraries>
+	<target-player>10.0.0</target-player>
+	
+	<output>../bin/as3-mixin.swf</output>
+	
+	<metadata>
+		<title>as3-mixin</title>
+		<description>Test suite for as3-mixin</description>
+		<publisher>Lars van de Kerkhof</publisher>
+		<creator>Lars van de Kerkhof</creator>
+		<language>EN</language>
+	</metadata>
+</flex-config>
