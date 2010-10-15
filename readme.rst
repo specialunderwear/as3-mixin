@@ -51,6 +51,6 @@ are defined as public variables.
 After you've done that, you can create funky circles and do some scaling
 on them::
 
-    var funkyCircle:Function = new FunkyCircle();
+    var funkyCircle:FunkyCircle = new FunkyCircle();
     funkyCircle.scale(2);
     funkyCircle.scaleTween(1);

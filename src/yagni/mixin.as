@@ -54,7 +54,7 @@ package yagni
 	 * on them:
 	 * 
 	 * <pre>
-	 * var funkyCircle:Function = new FunkyCircle();
+	 * var funkyCircle:FunkyCircle = new FunkyCircle();
 	 * funkyCircle.scale(2);
 	 * funkyCircle.scaleTween(1);
 	 * </pre>
