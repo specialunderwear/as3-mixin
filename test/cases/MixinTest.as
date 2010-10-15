@@ -20,7 +20,7 @@ package cases
 			Assert.assertEquals('ScaleX should be 2 now',
 				2, a.scaleX
 			);
-			Assert.assertEquals('ScaleX should be 2 now',
+			Assert.assertEquals('ScaleY should be 2 now',
 				2, a.scaleY
 			);
 			
