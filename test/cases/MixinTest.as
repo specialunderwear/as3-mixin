@@ -56,13 +56,13 @@ package cases
 			trace("MixinTest::benchmark() mixin construction",  starttime);
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
-				staticInstance.scale(2);
+				staticInstance.scale(i);
 			}
 			trace("MixinTest::benchmark() static function calls",  starttime);
 
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
-				mixedInstance.scale(2);
+				mixedInstance.scale(i);
 			}
 			trace("MixinTest::benchmark() mixed in function calls",  starttime);
 		}
