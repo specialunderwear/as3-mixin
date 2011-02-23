@@ -182,8 +182,8 @@ a mixin that defines the ``addObjectAtRowAndCol`` function object::
         public static const addObjectAtRowAndCol:Function = function(row:Number, col:Number):void
         {
             var c:FunkyCircle = new FunkyCircle()
-            c.x = cols * 100;
-            c.y = rows * 100;
+            c.x = col * 100;
+            c.y = row * 100;
             this.addChild(c);
         }
 
