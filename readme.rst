@@ -77,7 +77,7 @@ Base classes for sub symbols
 A very flawed attempt at factoring out behaviour for symbols in separate files,
 is to have user defined base classes for your symbols. It is possible set the
 base class of a symbol in the fla, to one of your own classes. The problem with
-this approach, is that there isvey hard to see if code is being used or not. When
+this approach, is that it is very hard to see if code is being used or not. When
 you change stuff in the fla, your base classes might become obsolete, without you
 noticing.
 
