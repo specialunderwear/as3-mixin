@@ -108,3 +108,13 @@ The instance variable square will get the behaviour defined in IsoMetricScaleMix
 which allows you to call ``super.square.scale(2);`` inside Layout. This way you
 can factor out the behaviour of sub symbols and not find any unpleasant surprises
 when you compile your fla.
+
+Performance
+-----------
+
+You can see what the performance is for regular objects versus objects with mixins
+by running the test suit::
+
+    make test
+    
+Try typing that in the root folder.
