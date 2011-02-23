@@ -136,16 +136,16 @@ You can also use mixin's to implement a delegate mechanism::
             }
             
             // delegate method default
-            public var objectAtRowAndCol:Function = function(row:Number, col:Number) {
+            public var addObjectAtRowAndCol:Function = function(row:Number, col:Number):void {
                 var a:Shape = new Shape();
                 with (a.graphics) {
-                    beginFill(data[row][col],1);
+                    beginFill(this.data[row][col],1);
                     drawRect(0, 0, 20, 40);
                     endFill();
                 }
                 a.x = col * 40;
                 a.y = row * 20;
-                return a;
+                this.addChild(a);
             }
             
             // delegate setter
@@ -159,7 +159,7 @@ You can also use mixin's to implement a delegate mechanism::
             {
                 for (var i:int = 0; i < data.length; i++) {
                     for (var j:int = 0; j < data[i].length; j++) {
-                        addChild(this.objectAtRowAndCol(i, j));
+                        this.addObjectAtRowAndCol(i, j);
                     }
                 }
             }
@@ -172,25 +172,25 @@ In the above case, calling ``draw()`` after construction will draw a 2x2 table,
 with cells in different colours.
 
 There is only one method that determines exactly what is being drawn in each cell,
-and where; ``objectAtRowAndCol``. This method can be overridden by setting the
+and where; ``addObjectAtRowAndCol``. This method can be overridden by setting the
 proper delegate object to the ``delegate`` setter. The delegate object should be
-a mixin that defines the ``objectAtRowAndCol`` function object::
+a mixin that defines the ``addObjectAtRowAndCol`` function object::
 
     public class TableDelegate
     {
         // using this delegate would fill the table with funky circles as cells!
-        public static const objectAtRowAndCol:Function = function(row:Number, col:Number):FunkyCircle
+        public static const addObjectAtRowAndCol:Function = function(row:Number, col:Number):void
         {
             var c:FunkyCircle = new FunkyCircle()
             c.x = cols * 100;
             c.y = rows * 100;
-            return c;
+            this.addChild(c);
         }
 
     }
 
 The advantage of doing it this way instead of extending the GeneralTable and
-overrding the ``objectAtRowAndCol`` method, is that setting the delegate works,
+overrding the ``addObjectAtRowAndCol`` method, is that setting the delegate works,
 even when the ``GeneralTable`` is allready used in other code. This will save you
 having to extend a whole bunch of classes, when the class you really want to override
 is inside a whole bunch of other classes.
@@ -204,17 +204,17 @@ which would complicate your code::
     public class GeneralTable
     {
         
-        // the delegate is a subobject, that defines objectAtRowAndCol.
+        // the delegate is a subobject, that defines addObjectAtRowAndCol.
         public var delegate:ObjectAtRowDelegate;
 
-        // draw would call objectAtRowAndCol on the subobject.
+        // draw would call addObjectAtRowAndCol on the subobject.
         public function draw():void
         {
             for (var i:int = 0; i < data.length; i++) {
                 for (var j:int = 0; j < data[i].length; j++) {
                 
                     // Complicated code!
-                    addChild(this.delegate.objectAtRowAndCol(this, i, j));
+                    addChild(this.delegate.addObjectAtRowAndCol(this, i, j));
                 }
             }
         }
@@ -225,12 +225,12 @@ If you want to delagate a method that also belongs to your public api, you would
 have to call the method like this::
 
     var table:GeneralTable = new GeneralTable();
-    table.delegate.objectAtRowAndCol(table, 1, 2);
+    table.delegate.addObjectAtRowAndCol(table, 1, 2);
     
 With a mixin as a delegate you can just go for::
 
     var table:GeneralTable = new GeneralTable();
-    table.objectAtRowAndCol( 1, 2);
+    table.addObjectAtRowAndCol( 1, 2);
 
 In short, using mixins as delegate, enables you to let delegates override part
 of your class it's public api, without complicating things.
