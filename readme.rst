@@ -167,7 +167,7 @@ You can also use mixin's to implement a delegate mechanism::
 
     }
 
-Above you can see a general, very unsophisticated, general table implementation.
+Above you can see a general, very unsophisticated, table implementation.
 In the above case, calling ``draw()`` after construction will draw a 2x2 table,
 with cells in different colours.
 
