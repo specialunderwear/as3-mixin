@@ -1,6 +1,10 @@
 as3-mixin
 =========
 
+note!
+
+Mixin's can never access private variables!
+
 Mixin's for subclassing symbols
 -------------------------------
 
@@ -110,6 +114,116 @@ which allows you to call ``super.square.scale(2);`` inside Layout. This way you
 can factor out the behaviour of sub symbols and not find any unpleasant surprises
 when you compile your fla.
 
+Mixins as delegates
+-------------------
+
+You can also use mixin's to implement a delegate mechanism::
+
+    package
+    {   
+        import yagni.mixin;
+
+        public class GeneralTable
+        {
+            public var data:Array = [
+                [0x1F9925, 0x992553],
+                [0x252C99, 0x961099]
+            ];
+            
+            public function GeneralTable(data:Array=null) {
+                if (data)
+                    this.data = data;
+            }
+            
+            // delegate method default
+            public var objectAtRowAndCol:Function = function(row:Number, col:Number) {
+                var a:Shape = new Shape();
+                with (a.graphics) {
+                    beginFill(data[row][col],1);
+                    drawRect(0, 0, 20, 40);
+                    endFill();
+                }
+                a.x = col * 40;
+                a.y = row * 20;
+                return a;
+            }
+            
+            // delegate setter
+            public function set delegate(delegate:Object):void
+            {
+                mixin(this, delegate);
+            }
+        
+            // draw uses the delegate method to draw the table cells.
+            public function draw():void
+            {
+                for (var i:int = 0; i < data.length; i++) {
+                    for (var j:int = 0; j < data[i].length; j++) {
+                        addChild(this.objectAtRowAndCol(i, j));
+                    }
+                }
+            }
+        }
+
+    }
+
+Above you can see a general, very unsophisticated, general table implementation.
+In the above case, calling ``draw()`` after construction will draw a 2x2 table,
+with cells in different colours.
+
+There is only one method that determines exactly what is being drawn in each cell,
+and where; ``objectAtRowAndCol``. This method can be overridden by setting the
+proper delegate object to the ``delegate`` setter. The delegate object should be
+a mixin that defines the ``objectAtRowAndCol`` function object::
+
+    public class TableDelegate
+    {
+        // using this delegate would fill the table with funky circles as cells!
+        public static const objectAtRowAndCol:Function = function(row:Number, col:Number):FunkyCircle
+        {
+            var c:FunkyCircle = new FunkyCircle()
+            c.x = cols * 100;
+            c.y = rows * 100;
+            return c;
+        }
+
+    }
+
+The advantage of doing it this way instead of extending the GeneralTable and
+overrding the ``objectAtRowAndCol`` method, is that setting the delegate works,
+even when the ``GeneralTable`` is allready used in other code. This will save you
+having to extend a whole bunch of classes, when the class you really want to override
+is inside a whole bunch of other classes.
+
+Delegate as sub object
+----------------------
+
+Traditional approached would define the delegate as a sub object of ``GeneralTable``,
+which would complicate your code::
+
+    public class GeneralTable
+    {
+        
+        // the delegate is a subobject, that defines objectAtRowAndCol.
+        public var delegate:ObjectAtRowDelegate;
+
+        // draw would call objectAtRowAndCol on the subobject.
+        public function draw():void
+        {
+            for (var i:int = 0; i < data.length; i++) {
+                for (var j:int = 0; j < data[i].length; j++) {
+                
+                    // Complicated code!
+                    addChild(this.delegate.objectAtRowAndCol(this, i, j));
+                }
+            }
+        }
+    
+    }
+
+Using mixins as delegate, enables you to let delegates override part of your
+class it's public api, without complicating things.
+
 Performance
 -----------
 
@@ -119,3 +233,4 @@ by running the test suit::
     make test
     
 Try typing that in the root folder.
+

@@ -9,6 +9,7 @@ package cases
 	import mocks.IsoMetricScaleMixin;
 	import Runner;
 	import mx.core.FlexGlobals;
+	import mocks.FunkyCirclePrivate;
 	
 	public class MixinTest
 	{
@@ -30,6 +31,14 @@ package cases
 				2, a.scaleY
 			);
 			
+		}
+		
+		[Test(expects='Error')]
+		public function mixinCanNotAccessPrivateVariables():void
+		{
+			var a:FunkyCirclePrivate = new FunkyCirclePrivate();
+			// arrayLength tries to access a private variable, which it can't
+			a.arrayLength();
 		}
 		
 		[Test]
