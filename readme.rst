@@ -1,5 +1,5 @@
-as3-mixin
-=========
+Nifty tricks with as3-mixin
+===========================
 
 note!
 
