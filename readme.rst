@@ -98,7 +98,7 @@ methods::
 
     public class Layout extends LayoutSymbol
     {
-      public function FunkyCircle()
+      public function Layout()
       {
           super();
           
