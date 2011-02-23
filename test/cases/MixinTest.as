@@ -74,7 +74,7 @@ package cases
 				staticInstance = new FunkyCircleStatic();
 			}
 			
-			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() static construction, 10.000 instances: " +  starttime + "ms.\n";
+			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() regular construction, 10.000 instances: " +  starttime + "ms.\n";
 
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
@@ -88,7 +88,7 @@ package cases
 				staticInstance.scale(i);
 			}
 			
-			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() static function cals, 10.000 calls: " +  starttime + "ms.\n";
+			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() regular function calls, 10.000 calls: " +  starttime + "ms.\n";
 
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
