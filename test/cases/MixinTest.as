@@ -5,6 +5,8 @@ package cases
 	import com.greensock.TweenLite;
 	import flash.utils.getTimer;
 	import mocks.FunkyCircleStatic;
+	import yagni.mixin;
+	import mocks.IsoMetricScaleMixin;
 	
 	public class MixinTest
 	{
@@ -34,6 +36,21 @@ package cases
 			var a:FunkyCircle = new FunkyCircle();
 			Assert.assertTrue('The bounce method from BounceMixin should be added as well',
 				a.bounce(7) is TweenLite
+			);
+		}
+		
+		[Test]
+		public function mixinOnInstancesInFlaWorks():void
+		{
+			var a:FunkyCircle = new FunkyCircle();
+			mixin(a.square, IsoMetricScaleMixin);
+			a.square.scale(1);
+			Assert.assertEquals('The scale of the square instance is back to 1, so its width is back to 166',
+				a.square.width, 166
+			);
+			
+			Assert.assertEquals('The height should be the same as the width because scaling is isometric',
+				a.square.width, a.square.height
 			);
 		}
 		

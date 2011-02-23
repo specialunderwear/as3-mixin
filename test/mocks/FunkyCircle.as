@@ -3,6 +3,7 @@ package mocks
 	import yagni.mixin;
 	import mocks.IsoMetricScaleMixin;
 	import mocks.BounceMixin;
+	import flash.display.MovieClip;
 	
 	public class FunkyCircle extends FunkyCircleSymbol
 	{
