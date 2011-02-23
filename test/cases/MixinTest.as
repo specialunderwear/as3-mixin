@@ -7,6 +7,8 @@ package cases
 	import mocks.FunkyCircleStatic;
 	import yagni.mixin;
 	import mocks.IsoMetricScaleMixin;
+	import Runner;
+	import mx.core.FlexGlobals;
 	
 	public class MixinTest
 	{
@@ -71,23 +73,29 @@ package cases
 			for (var i:int = 0; i < 10000; i++) {
 				staticInstance = new FunkyCircleStatic();
 			}
-			trace("MixinTest::benchmark() static construction",  starttime);
+			
+			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() static construction, 10.000 instances: " +  starttime + "ms.\n";
+
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
 				mixedInstance = new FunkyCircle();
 			}
-			trace("MixinTest::benchmark() mixin construction",  starttime);
+
+			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() mixin construction, 10.000 instances: " +  starttime + "ms.\n";
+
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
 				staticInstance.scale(i);
 			}
-			trace("MixinTest::benchmark() static function calls",  starttime);
+			
+			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() static function cals, 10.000 calls: " +  starttime + "ms.\n";
 
 			starttime = getTimer();
 			for (i = 0; i < 10000; i++) {
 				mixedInstance.scale(i);
 			}
-			trace("MixinTest::benchmark() mixed in function calls",  starttime);
+			
+			FlexGlobals.topLevelApplication.results += "MixinTest::benchmark() mixed in function calls, 10.000 calls: " +  starttime + "ms.\n";
 		}
 	}
 }
