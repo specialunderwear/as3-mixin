@@ -44,7 +44,13 @@ package cases
 		{
 			var a:FunkyCircle = new FunkyCircle();
 			mixin(a.square, IsoMetricScaleMixin);
+			
+			Assert.assertEquals('Before the scale the width of the square instance should be 60',
+				a.square.width, 60
+			);
+			
 			a.square.scale(1);
+			
 			Assert.assertEquals('The scale of the square instance is back to 1, so its width is back to 166',
 				a.square.width, 166
 			);
