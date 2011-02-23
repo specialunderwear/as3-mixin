@@ -214,7 +214,7 @@ which would complicate your code::
                 for (var j:int = 0; j < data[i].length; j++) {
                 
                     // Complicated code!
-                    addChild(this.delegate.addObjectAtRowAndCol(this, i, j));
+                    this.delegate.addObjectAtRowAndCol(this, i, j);
                 }
             }
         }
