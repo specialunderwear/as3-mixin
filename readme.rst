@@ -1,6 +1,9 @@
 as3-mixin
 =========
 
+Mixin's for subclassing symbols
+-------------------------------
+
 Mixin's can be used when you are subclassing a symbol defined in a .fla file.
 It is very convenient to do, but uses up your chance to add common functionality
 through a base class. In that case you can use a mixin, a class who's methods
@@ -54,3 +57,54 @@ on them::
     var funkyCircle:FunkyCircle = new FunkyCircle();
     funkyCircle.scale(2);
     funkyCircle.scaleTween(1);
+
+Mixin's for doing layout in the fla
+-----------------------------------
+
+The above described method for doing graphics is very handy for small symbols.
+When your UI becomes more intricate and symbols are getting nested, the code for
+one symbol can grow a lot. You don't want to include the code for all the subsymbols
+in the same file. What you want is to define the behaviour of the subsymbols in
+a separate file. 
+
+Base classes for sub symbols
+++++++++++++++++++++++++++++
+
+A very flawed attempt at factoring out behaviour for symbols in separate files,
+is to have user defined base classes for your symbols. It is possible set the
+base class of a symbol in the fla to your own class. The problem with this is 
+that there is no way to see if code is being used or not. So when you change 
+stuff in the fla, your base classes might become obsolete, without you noticing.
+
+Or the other way around, you might delete a file for which you can not find a reference
+anywhere in your code base, to find out it is still being used when you try to
+recompile the fla.
+
+Mixin's for sub symbols
++++++++++++++++++++++++
+
+Mixin's are a much better option. If you leave the type of your symbols set to
+``MovieClip``, since ``MovieClip`` is dynamic, you can add behaviour by mixin in
+methods::
+
+    import yagni.mixin;
+    import mixins.IsoMetricScaleMixin;
+    import mixins.BounceMixin;
+
+    public class Layout extends LayoutSymbol
+    {
+      public function FunkyCircle()
+      {
+          super();
+          
+          // LayoutSymbol has an instance variable named square,
+          // which is of the default type for symbols, MovieClip
+          mixin(super.square, IsoMetricScaleMixin);
+      }
+
+    }
+
+The instance variable square will get the behaviour defined in IsoMetricScaleMixin,
+which allows you to call ``super.square.scale(2);`` inside Layout. This way you
+can factor out the behaviour of sub symbols and not find any unpleasant surprises
+when you compile your fla.
