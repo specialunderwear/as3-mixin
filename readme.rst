@@ -198,7 +198,7 @@ is inside a whole bunch of other classes.
 Delegate as sub object
 ----------------------
 
-Traditional approached would define the delegate as a sub object of ``GeneralTable``,
+Traditional approaches would define the delegate as a sub object of ``GeneralTable``,
 which would complicate your code::
 
     public class GeneralTable
@@ -221,8 +221,19 @@ which would complicate your code::
     
     }
 
-Using mixins as delegate, enables you to let delegates override part of your
-class it's public api, without complicating things.
+If you want to delagate a method that also belongs to your public api, you would
+have to call the method like this::
+
+    var table:GeneralTable = new GeneralTable();
+    table.delegate.objectAtRowAndCol(table, 1, 2);
+    
+With a mixin as a delegate you can just go for::
+
+    var table:GeneralTable = new GeneralTable();
+    table.objectAtRowAndCol( 1, 2);
+
+In short, using mixins as delegate, enables you to let delegates override part
+of your class it's public api, without complicating things.
 
 Performance
 -----------
