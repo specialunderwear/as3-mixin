@@ -189,8 +189,8 @@ a mixin that defines the ``addObjectAtRowAndCol`` function object::
 
     }
 
-The advantage of doing it this way instead of extending the GeneralTable and
-overrding the ``addObjectAtRowAndCol`` method, is that setting the delegate works,
+The advantage of doing it this way instead of extending the ``GeneralTable`` and
+overriding the ``addObjectAtRowAndCol`` method, is that setting the delegate works,
 even when the ``GeneralTable`` is allready used in other code. This will save you
 having to extend a whole bunch of classes, when the class you really want to override
 is inside a whole bunch of other classes.
