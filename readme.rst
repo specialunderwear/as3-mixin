@@ -72,12 +72,13 @@ Base classes for sub symbols
 
 A very flawed attempt at factoring out behaviour for symbols in separate files,
 is to have user defined base classes for your symbols. It is possible set the
-base class of a symbol in the fla to your own class. The problem with this is 
-that there is no way to see if code is being used or not. So when you change 
-stuff in the fla, your base classes might become obsolete, without you noticing.
+base class of a symbol in the fla, to one of your own classes. The problem with
+this approach, is that there isvey hard to see if code is being used or not. When
+you change stuff in the fla, your base classes might become obsolete, without you
+noticing.
 
 Or the other way around, you might delete a file for which you can not find a reference
-anywhere in your code base, to find out it is still being used when you try to
+anywhere in your code base, only to find out it is still being used when you try to
 recompile the fla.
 
 Mixin's for sub symbols
