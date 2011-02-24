@@ -149,6 +149,7 @@ You can also use mixin's to implement a delegate mechanism::
             }
             
             // delegate setter
+            // maybe you want to [Inject] this?
             public function set delegate(delegate:Object):void
             {
                 mixin(this, delegate);
