@@ -247,3 +247,9 @@ by running the test suit::
     
 Try typing that in the root folder.
 
+Event handlers in mixins.
+-------------------------
+
+If you want to define behaviour including events in your mixin's you might want
+to check out https://github.com/specialunderwear/as3-callatevent to take care
+of the scoping of ``this`` inside the event handlers.
