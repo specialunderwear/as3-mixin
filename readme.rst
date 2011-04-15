@@ -55,12 +55,13 @@ The class with the symbol you are extending should look like this::
 Note that ``mixin`` accepts multiple mixin classes and that the mixin methods
 are defined as public variables.
 
-After you've done that, you can create funky circles and do some scaling
-on them::
+After you've done that, you can create funky circles and do some scaling or
+bouncing on them::
 
     var funkyCircle:FunkyCircle = new FunkyCircle();
     funkyCircle.scale(2);
     funkyCircle.scaleTween(1);
+    funkyCircle.bounce();
 
 Mixin's for doing layout in the fla
 -----------------------------------
@@ -75,7 +76,7 @@ Base classes for sub symbols
 ++++++++++++++++++++++++++++
 
 A very flawed attempt at factoring out behaviour for symbols in separate files,
-is to have user defined base classes for your symbols. It is possible set the
+is to have user defined base classes for your symbols. It is possible to set the
 base class of a symbol in the fla, to one of your own classes. The problem with
 this approach, is that it is very hard to see if code is being used or not. When
 you change stuff in the fla, your base classes might become obsolete, without you
@@ -109,8 +110,8 @@ methods::
 
     }
 
-The instance variable square will get the behaviour defined in IsoMetricScaleMixin,
-which allows you to call ``super.square.scale(2);`` inside Layout. This way you
+The instance variable square will get the behaviour defined in ``IsoMetricScaleMixin``,
+which allows you to call ``super.square.scale(2);`` inside ``Layout``. This way you
 can factor out the behaviour of sub symbols and not find any unpleasant surprises
 when you compile your fla.
 
@@ -222,13 +223,13 @@ which would complicate your code::
     
     }
 
-If you want to delagate a method that also belongs to your public api, you would
+If you want to delegate a method that also belongs to your public api, you would
 have to call the method like this::
 
     var table:GeneralTable = new GeneralTable();
     table.delegate.addObjectAtRowAndCol(table, 1, 2);
     
-With a mixin as a delegate you can just go for::
+With a ``mixin`` as a delegate you can just go for::
 
     var table:GeneralTable = new GeneralTable();
     table.addObjectAtRowAndCol( 1, 2);
