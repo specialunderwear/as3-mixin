@@ -13,7 +13,8 @@ It is very convenient to do, but uses up your chance to add common functionality
 through a base class. In that case you can use a mixin, a class who's methods
 are added to your class in the constructor.
 
-Mixin classes must have only static constants of type ``Function``::
+Mixin classes must have only static constants of type ``Function``, Functions not
+defined as ``static const`` will not be recognised by ``mixin``.::
 
   import com.greensock.TweenLite;
 
